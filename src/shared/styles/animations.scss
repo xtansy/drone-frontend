@@ -1,0 +1,43 @@
+@keyframes flicker {
+  0%,
+  19.999%,
+  22%,
+  62.999%,
+  64%,
+  64.999%,
+  70%,
+  100% {
+    opacity: 0.99;
+  }
+  20%,
+  21.999%,
+  63%,
+  63.999%,
+  65%,
+  69.999% {
+    opacity: 0.4;
+  }
+}
+
+@keyframes border-glow {
+  0%,
+  100% {
+    border-color: var(--border-color);
+    box-shadow: 0 0 5px var(--glow-color);
+  }
+  50% {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 15px var(--glow-color);
+  }
+}
+@keyframes gradient-shift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}

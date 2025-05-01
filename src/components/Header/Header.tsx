@@ -1,0 +1,57 @@
+import styles from "./styles.module.scss";
+
+import cn from "classnames";
+import { NavLink } from "react-router";
+import { Box, Typography } from "@mui/material";
+
+import { NeonDroneSvg } from "../../shared/ui";
+import { Paths } from "../../shared/constants";
+
+const MENU_ITEMS = [
+  {
+    path: Paths.loadInformation,
+    text: "Загрузить данные",
+  },
+  {
+    path: Paths.information,
+    text: "Данные",
+  },
+  {
+    path: Paths.map,
+    text: "Карта",
+  },
+  {
+    path: Paths.statistics,
+    text: "Статистика",
+  },
+];
+
+export const Header = () => {
+  return (
+    <>
+      <Box className={styles.content}>
+        <Box className={styles.logoBlock}>
+          <NeonDroneSvg size={85} />
+          <Typography className={styles.logo} variant="h1">
+            Hmel<span>Drone</span>
+          </Typography>
+        </Box>
+        <Box className={styles.menuBlock}>
+          {MENU_ITEMS.map((menuItem) => (
+            <NavLink
+              to={menuItem.path}
+              className={({ isActive }) => {
+                return cn(styles.menuItem, {
+                  [styles.menuItem_active]: isActive,
+                });
+              }}
+            >
+              <Typography variant="h2">{menuItem.text}</Typography>
+            </NavLink>
+          ))}
+        </Box>
+      </Box>
+      <div className={styles.border} />
+    </>
+  );
+};
