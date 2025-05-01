@@ -37,8 +37,9 @@ export const Header = () => {
           </Typography>
         </Box>
         <Box className={styles.menuBlock}>
-          {MENU_ITEMS.map((menuItem) => (
+          {MENU_ITEMS.map((menuItem, index) => (
             <NavLink
+              key={index}
               to={menuItem.path}
               className={({ isActive }) => {
                 return cn(styles.menuItem, {

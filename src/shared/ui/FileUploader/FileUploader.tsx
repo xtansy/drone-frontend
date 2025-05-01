@@ -23,7 +23,7 @@ export const FileUploader = () => {
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     onDrop,
-    accept: [".txt, .csv"],
+    accept: [".csv", ".txt"],
     maxSize: 10 * 1024 * 1024, // 10MB
   });
 
@@ -42,7 +42,7 @@ export const FileUploader = () => {
           или кликните для выбора файлов
         </Typography>
         <Typography variant="caption" className={styles.subtitle}>
-          (Поддерживаются JPG, PNG, PDF, CSV до 10MB)
+          Поддерживаются TXT, CSV до 10MB
         </Typography>
       </Box>
 

@@ -30,6 +30,7 @@
     box-shadow: 0 0 15px var(--glow-color);
   }
 }
+
 @keyframes gradient-shift {
   0% {
     background-position: 0% 50%;
@@ -39,5 +40,38 @@
   }
   100% {
     background-position: 0% 50%;
+  }
+}
+
+@keyframes glitch {
+  0% {
+    transform: translate(0);
+    text-shadow: -2px 0 var(--primary-color), 2px 0 var(--accent-color);
+  }
+  25% {
+    transform: translate(-2px, 2px);
+    text-shadow: 2px -2px var(--primary-color), -2px 2px var(--accent-color);
+  }
+  50% {
+    transform: translate(2px, -2px);
+    text-shadow: -2px 2px var(--primary-color), 2px -2px var(--accent-color);
+  }
+  75% {
+    transform: translate(2px, 2px);
+    text-shadow: 2px 0 var(--primary-color), -2px 0 var(--accent-color);
+  }
+  100% {
+    transform: translate(0);
+    text-shadow: -2px 0 var(--primary-color), 2px 0 var(--accent-color);
+  }
+}
+
+@keyframes blink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.3;
   }
 }

@@ -10,8 +10,8 @@ interface LayoutProps {
 export const Layout: FC<LayoutProps> = ({ header, footer }) => {
   return (
     <Container
-      maxWidth="lg"
-      sx={{ display: "flex", flexDirection: "column", height: "100vh" }}
+      maxWidth="xl"
+      sx={{ display: "flex", flexDirection: "column", minHeight: "100vh" }}
     >
       {header}
       <Box sx={{ flexGrow: 1 }}>
