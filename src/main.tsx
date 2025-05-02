@@ -1,7 +1,7 @@
 import "./shared/styles/base.css";
 
 import { createRoot } from "react-dom/client";
-import { BrowserRouter } from "react-router";
+import { HashRouter } from "react-router";
 
 import CssBaseline from "@mui/material/CssBaseline";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
@@ -39,11 +39,11 @@ const theme = createTheme(
 );
 
 createRoot(document.getElementById("root")!).render(
-  <BrowserRouter basename={import.meta.env.BASE_URL}>
+  <HashRouter>
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <Router />
       <CursorEffect />
     </ThemeProvider>
-  </BrowserRouter>
+  </HashRouter>
 );
