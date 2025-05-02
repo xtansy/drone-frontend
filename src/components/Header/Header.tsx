@@ -1,7 +1,7 @@
 import styles from "./styles.module.scss";
 
 import cn from "classnames";
-import { NavLink } from "react-router";
+import { NavLink, Link } from "react-router";
 import { Box, Typography } from "@mui/material";
 
 import { NeonDroneSvg } from "../../shared/ui";
@@ -32,9 +32,14 @@ export const Header = () => {
       <Box className={styles.content}>
         <Box className={styles.logoBlock}>
           <NeonDroneSvg size={85} />
-          <Typography className={styles.logo} variant="h1">
-            Hmel<span>Drone</span>
-          </Typography>
+          <Link
+            style={{ textDecoration: "none", color: "inherit" }}
+            to={Paths.informationLoad}
+          >
+            <Typography className={styles.logo} variant="h1">
+              Hmel<span>Drone</span>
+            </Typography>
+          </Link>
         </Box>
         <Box className={styles.menuBlock}>
           {MENU_ITEMS.map((menuItem, index) => (
