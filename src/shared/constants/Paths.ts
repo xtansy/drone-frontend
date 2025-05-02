@@ -1,5 +1,5 @@
 export const Paths = {
-  loadInformation: "/informationLoad",
+  informationLoad: "/informationLoad",
   information: "/information",
   map: "/map",
   statistics: "/statistics",

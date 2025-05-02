@@ -9,7 +9,7 @@ import { Paths } from "../../shared/constants";
 
 const MENU_ITEMS = [
   {
-    path: Paths.loadInformation,
+    path: Paths.informationLoad,
     text: "Загрузить данные",
   },
   {

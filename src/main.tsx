@@ -39,7 +39,7 @@ const theme = createTheme(
 );
 
 createRoot(document.getElementById("root")!).render(
-  <BrowserRouter>
+  <BrowserRouter basename={import.meta.env.BASE_URL}>
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <Router />
