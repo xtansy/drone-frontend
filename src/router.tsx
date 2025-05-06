@@ -5,8 +5,6 @@ import { Information, MapPage, Statistics, InformationLoad } from "./pages";
 import { Paths } from "./shared/constants";
 
 export const Router = () => {
-  console.log("@@ process.env.NODE_ENV", process.env.NODE_ENV);
-  console.log("@@ import.meta.env.PROD", import.meta.env.PROD);
   return (
     <Routes>
       <Route element={<Layout header={<Header />} footer={<Footer />} />}>
@@ -17,7 +15,11 @@ export const Router = () => {
         <Route path={Paths.informationLoad} element={<InformationLoad />} />
         <Route path={Paths.information} element={<Information />} />
         <Route path={Paths.map} element={<MapPage />} />
-        <Route path={Paths.statistics} element={<Statistics />} />
+        <Route path="/statistics/:type" element={<Statistics />} />
+        <Route
+          path={Paths.statistics}
+          element={<Navigate to="/statistics/summary" replace />}
+        />
       </Route>
     </Routes>
   );

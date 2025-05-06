@@ -17,9 +17,19 @@
     }
   }
 
-  &.active {
-    border-color: var(--accent-color);
-    box-shadow: 0 0 20px var(--glow-color);
+  &_active {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 12px var(--glow-color);
+  }
+
+  &_success {
+    border-color: #00ff99;
+    box-shadow: 0 0 12px rgba(0, 255, 153, 0.5);
+  }
+
+  &_error {
+    border-color: #ff3366;
+    box-shadow: 0 0 12px rgba(255, 51, 102, 0.5);
   }
 }
 

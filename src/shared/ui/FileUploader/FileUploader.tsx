@@ -1,6 +1,6 @@
 import styles from "./styles.module.scss";
 
-import { useCallback, useState } from "react";
+import { FC, useCallback, useState } from "react";
 import { useDropzone } from "react-dropzone";
 import {
   CloudUpload,
@@ -9,29 +9,60 @@ import {
   Close,
 } from "@mui/icons-material";
 import { Typography, Box, IconButton } from "@mui/material";
+import cn from "classnames";
+import { ButtonCustom, Notification } from "../";
 
-export const FileUploader = () => {
+interface FileUploaderProps {
+  onSend: (files: File[]) => void;
+}
+
+export const FileUploader: FC<FileUploaderProps> = ({ onSend }) => {
   const [files, setFiles] = useState<File[]>([]);
+  const [isSuccess, setIsSuccess] = useState<boolean>(false);
+  const [isError, setIsError] = useState<boolean>(false);
 
-  const onDrop = useCallback((acceptedFiles: File[]) => {
-    setFiles((prevFiles) => [...prevFiles, ...acceptedFiles]);
-  }, []);
+  const onDrop = useCallback(
+    (acceptedFiles: File[], fileRejections: File[]) => {
+      if (fileRejections.length > 0) {
+        setIsError(true);
+        return;
+      }
+
+      setFiles((prevFiles) => [...prevFiles, ...acceptedFiles]);
+      setIsSuccess(true);
+    },
+    []
+  );
+
+  const { getRootProps, getInputProps, isDragActive } = useDropzone({
+    onDrop,
+    accept: [".txt", ".csv"],
+    maxSize: 10 * 1024 * 1024, // 10MB
+  });
 
   const removeFile = (index: number) => {
     setFiles((prevFiles) => prevFiles.filter((_, i) => i !== index));
   };
 
-  const { getRootProps, getInputProps, isDragActive } = useDropzone({
-    onDrop,
-    accept: [".csv", ".txt"],
-    maxSize: 10 * 1024 * 1024, // 10MB
-  });
+  const onClickSend = () => {
+    onSend(files);
+    setFiles([]);
+  };
+
+  const handleClose = () => {
+    setIsSuccess(false);
+    setIsError(false);
+  };
 
   return (
     <Box>
       <Box
         {...getRootProps()}
-        className={`${styles.dropzone} ${isDragActive ? styles.active : ""}`}
+        className={cn(styles.dropzone, {
+          [styles.dropzone_active]: isDragActive,
+          [styles.dropzone_success]: isSuccess,
+          [styles.dropzone_error]: isError,
+        })}
       >
         <input {...getInputProps()} />
         <CloudUpload className={styles.icon} />
@@ -71,6 +102,26 @@ export const FileUploader = () => {
           ))}
         </Box>
       )}
+
+      {files.length > 0 && (
+        <ButtonCustom onClick={onClickSend} sx={{ mt: 1 }}>
+          Отправить
+        </ButtonCustom>
+      )}
+
+      <Notification
+        open={isSuccess}
+        severity="success"
+        onClose={handleClose}
+        text="Файл(ы) успешно добавлены!"
+      />
+
+      <Notification
+        open={isError}
+        severity="error"
+        onClose={handleClose}
+        text="Один или несколько файлов не прошли проверку: размер или тип"
+      />
     </Box>
   );
 };
