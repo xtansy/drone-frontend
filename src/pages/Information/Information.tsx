@@ -128,7 +128,7 @@ export const Information = () => {
         Мониторинговая таблица
       </Typography>
 
-      <Box sx={{ height: "400px", width: "100%", overflow: "auto" }}>
+      <Box sx={{ height: "490px", width: "100%", overflow: "auto" }}>
         <DataGridCustom rows={rows} columns={columns} />
       </Box>
     </PaperCustom>

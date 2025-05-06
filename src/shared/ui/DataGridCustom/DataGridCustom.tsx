@@ -18,6 +18,12 @@ export const DataGridCustom: FC<DataGridProps> = ({ ...rest }) => {
         "& .MuiDataGrid-cell, & .MuiDataGrid-columnHeader": {
           userSelect: "none",
         },
+        "& .MuiDataGrid-row": {
+          backgroundColor: "#0a0a1a",
+        },
+        "& .MuiDataGrid-footerContainer": {
+          backgroundColor: "#0a0a1a",
+        },
       }}
       disableColumnResize
       disableColumnMenu
