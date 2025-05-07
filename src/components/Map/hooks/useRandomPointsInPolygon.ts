@@ -2,7 +2,6 @@ import { useEffect } from "react";
 import { Point } from "ol/geom";
 import Feature from "ol/Feature";
 import VectorSource from "ol/source/Vector";
-import { Circle, Fill, Stroke, Style } from "ol/style";
 
 export const useRandomPointsInPolygon = (
   vectorSource: VectorSource | null,
@@ -54,36 +53,10 @@ export const useRandomPointsInPolygon = (
       }
     }
 
-    // Стиль для точек с неоновым эффектом
-    const pointStyle = new Style({
-      image: new Circle({
-        radius: 4,
-        fill: new Fill({
-          color: "rgba(0, 191, 255, 0.8)", // primary-color
-        }),
-        stroke: new Stroke({
-          color: "rgba(0, 255, 255, 0.9)", // accent-color
-          width: 2,
-        }),
-      }),
-    });
-
-    // Стиль свечения для точек
-    const glowStyle = new Style({
-      image: new Circle({
-        radius: 7,
-        stroke: new Stroke({
-          color: "rgba(0, 191, 255, 0.3)", // glow-color
-          width: 4,
-        }),
-      }),
-    });
-
     // Добавляем точки на карту
     points.forEach((coord) => {
       const point = new Point(coord);
       const feature = new Feature(point);
-      feature.setStyle([glowStyle, pointStyle]);
       vectorSource.addFeature(feature);
     });
 
