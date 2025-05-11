@@ -20,6 +20,7 @@ export const DataGridCustom: FC<DataGridProps> = ({ ...rest }) => {
         },
         "& .MuiDataGrid-row": {
           backgroundColor: "#0a0a1a",
+          cursor: "pointer",
         },
         "& .MuiDataGrid-footerContainer": {
           backgroundColor: "#0a0a1a",

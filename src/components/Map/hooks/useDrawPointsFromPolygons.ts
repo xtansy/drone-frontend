@@ -16,7 +16,6 @@ export const useDrawPointsFromPolygons = (
 
     polygons.forEach((polygon) => {
       polygon.points.forEach((point) => {
-        console.log("@@ point", point);
         const geometry = new Point([point.latitude, point.longitude]);
 
         const feature = new Feature({
@@ -25,6 +24,8 @@ export const useDrawPointsFromPolygons = (
           _id: point._id,
           measurements: point.measurements,
           organizationPoint: point.organizationPoint,
+          latitude: point.latitude,
+          longitude: point.longitude,
         }) as PointFeature;
 
         vectorSource.addFeature(feature);

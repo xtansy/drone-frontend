@@ -8,3 +8,4 @@ export * from "./DataGridCustom/DataGridCustom";
 export * from "./ButtonCustom/ButtonCustom";
 export * from "./Notification/Notification";
 export * from "./LoaderDrone/LoaderDrone";
+export * from "./OrganizationSvg/OrganizationSvg";

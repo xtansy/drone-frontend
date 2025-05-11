@@ -19,13 +19,13 @@ export interface PolygonFeature
   get(name: "organizationPoint"): OrganizationPointModel;
 }
 
-export interface PointFeature
-  extends Feature<Point>,
-    Omit<PointModel, "latitude" | "longitude"> {
+export interface PointFeature extends Feature<Point>, PointModel {
   get(name: "_id"): string;
   get(name: "featureType"): "point";
   get(name: "measurements"): MeasurementPointModel[];
   get(name: "organizationPoint"): OrganizationPointModel;
+  get(name: "latitude"): number;
+  get(name: "longitude"): number;
 }
 
 export interface OrganizationPointFeature
@@ -38,6 +38,17 @@ export interface OrganizationPointFeature
 
 export interface PopupData {
   type: FeatureType;
-  coordinate: number[];
   data: any;
 }
+
+export interface PointClickData {
+  type: "point";
+  data: PointModel;
+}
+
+export interface PolygonClickData {
+  type: "polygon";
+  data: Omit<PolygonModel, "coordinates">;
+}
+
+export type ClickData = PointClickData | PolygonClickData;

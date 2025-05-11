@@ -9,7 +9,7 @@ import { getAllPoints } from "../../shared/api";
 import { columns, type PointRow } from "./constants";
 import { type PointModel } from "../../shared/types";
 import { generateRandomNumber } from "../../shared/lib";
-
+import { useNavigate } from "react-router";
 const converter = (points: PointModel[]): PointRow[] => {
   const ans: PointRow[] = [];
 
@@ -40,7 +40,7 @@ const converter = (points: PointModel[]): PointRow[] => {
 
 export const Information = () => {
   const [points, setPoints] = useState<PointRow[]>([]);
-
+  const navigate = useNavigate();
   useEffect(() => {
     getAllPoints().then((res) => {
       const rows = converter(res.data);
@@ -48,14 +48,25 @@ export const Information = () => {
     });
   }, []);
 
+  const handleRowClick = (lat: number, lon: number) => {
+    navigate(`/map?lat=${lat}&lon=${lon}`);
+  };
+
   return (
     <PaperCustom sx={{ marginTop: "50px" }}>
       <Typography className={styles.title} variant="h2">
         Мониторинговая таблица
       </Typography>
 
-      <Box sx={{ height: "490px", width: "100%", overflow: "auto" }}>
-        <DataGridCustom rows={points} columns={columns} />
+      <Box sx={{ maxHeight: "500px", width: "100%", overflow: "auto" }}>
+        <DataGridCustom
+          rows={points}
+          columns={columns}
+          onRowClick={(params) => {
+            const { latitude, longitude } = params.row;
+            handleRowClick(latitude, longitude);
+          }}
+        />
       </Box>
     </PaperCustom>
   );

@@ -58,7 +58,6 @@ export const usePopup = (
         if (isPolygonFeature(feature)) {
           setPopupData({
             type: "polygon",
-            coordinate,
             data: {
               _id: feature.get("_id"),
               points: feature.get("points"),
@@ -68,16 +67,16 @@ export const usePopup = (
         } else if (isPointFeature(feature)) {
           setPopupData({
             type: "point",
-            coordinate,
             data: {
               _id: feature.get("_id"),
-              lastMeasurement: feature.get("measurements").at(-1),
+              measurements: feature.get("measurements"),
+              latitude: feature.get("latitude"),
+              longitude: feature.get("longitude"),
             },
           });
         } else if (isOrganizationPointFeature(feature)) {
           setPopupData({
             type: "organizationPoint",
-            coordinate,
             data: {
               _id: feature.get("_id"),
               name: feature.get("name"),
