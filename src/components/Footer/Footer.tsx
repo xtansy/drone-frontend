@@ -6,7 +6,7 @@ export const Footer = () => {
   return (
     <Box className={styles.footer} component="footer">
       <Typography className={styles.text}>
-        © 2025 HmelDrone. All rights reserved.
+        © 2025 MyDrone. Все права защищены.
       </Typography>
     </Box>
   );

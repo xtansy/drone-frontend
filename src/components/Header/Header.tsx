@@ -37,7 +37,7 @@ export const Header = () => {
             to={Paths.informationLoad}
           >
             <Typography className={styles.logo} variant="h1">
-              Hmel<span>Drone</span>
+              My<span>Drone</span>
             </Typography>
           </Link>
         </Box>
