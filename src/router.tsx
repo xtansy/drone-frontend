@@ -15,11 +15,7 @@ export const Router = () => {
         <Route path={Paths.informationLoad} element={<InformationLoad />} />
         <Route path={Paths.information} element={<Information />} />
         <Route path={Paths.map} element={<MapPage />} />
-        <Route path="/statistics/:type" element={<Statistics />} />
-        <Route
-          path={Paths.statistics}
-          element={<Navigate to="/statistics/summary" replace />}
-        />
+        <Route path={Paths.statistics} element={<Statistics />} />
       </Route>
     </Routes>
   );

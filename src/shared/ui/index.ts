@@ -9,3 +9,5 @@ export * from "./ButtonCustom/ButtonCustom";
 export * from "./Notification/Notification";
 export * from "./LoaderDrone/LoaderDrone";
 export * from "./OrganizationSvg/OrganizationSvg";
+export * from "./PointCardInfo/PointCardInfo";
+export * from "./PolygonCardInfo/PolygonCardInfo";

@@ -3,7 +3,11 @@ import { Feature, Map as OlMap } from "ol";
 import { MapBrowserEvent } from "ol";
 
 import { type ClickData } from "./types";
-import { isPolygonFeature, isPointFeature } from "../lib";
+import {
+  isPolygonFeature,
+  isPointFeature,
+  isOrganizationPointFeature,
+} from "../lib";
 
 import type { PolygonFeature, PointFeature } from "./types";
 
@@ -18,7 +22,11 @@ export const useClick = (map: OlMap | null) => {
       const feature = map.forEachFeatureAtPixel(evt.pixel, (f) => {
         if (!(f instanceof Feature)) return;
 
-        if (isPolygonFeature(f) || isPointFeature(f)) {
+        if (
+          isPolygonFeature(f) ||
+          isPointFeature(f) ||
+          isOrganizationPointFeature(f)
+        ) {
           return f;
         }
       }) as PolygonFeature | PointFeature | undefined;
