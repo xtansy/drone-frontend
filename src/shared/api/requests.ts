@@ -57,3 +57,43 @@ export const getAllPoints = async (): Promise<Response<PointModel[]>> => {
     return Promise.reject(errorMessage);
   }
 };
+
+export const getPointById = async (
+  pointId: string
+): Promise<Response<PointModel>> => {
+  try {
+    const { data } = await api.get<Response<PointModel>>(
+      `/getPointById/${pointId}`
+    );
+    return data;
+  } catch (_err) {
+    const err = _err as AxiosError<ErrorResponse>;
+
+    const errorMessage =
+      err?.response?.data?.errorMessage ||
+      err?.message ||
+      "Неизвестная ошибка при получении точки";
+
+    return Promise.reject(errorMessage);
+  }
+};
+
+export const getPolygonById = async (
+  polygonId: string
+): Promise<Response<PolygonModel>> => {
+  try {
+    const { data } = await api.get<Response<PolygonModel>>(
+      `/getPolygonById/${polygonId}`
+    );
+    return data;
+  } catch (_err) {
+    const err = _err as AxiosError<ErrorResponse>;
+
+    const errorMessage =
+      err?.response?.data?.errorMessage ||
+      err?.message ||
+      "Неизвестная ошибка при получении полигона";
+
+    return Promise.reject(errorMessage);
+  }
+};

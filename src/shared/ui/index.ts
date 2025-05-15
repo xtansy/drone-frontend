@@ -11,3 +11,5 @@ export * from "./LoaderDrone/LoaderDrone";
 export * from "./OrganizationSvg/OrganizationSvg";
 export * from "./PointCardInfo/PointCardInfo";
 export * from "./PolygonCardInfo/PolygonCardInfo";
+export * from "./Breadcrumbs/Breadcrumbs";
+export * from "./MetricCard/MetricCard";

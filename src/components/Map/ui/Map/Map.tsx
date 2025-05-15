@@ -9,11 +9,11 @@ import {
   usePopup,
   useDrawPointsFromPolygons,
   useClick,
-} from "../hooks";
-import { MAP_TARGET_ID } from "../lib";
-import { type PolygonModel } from "../../../shared/types";
-import { PointCardInfo, PolygonCardInfo } from "../../../shared/ui";
-import { Paths } from "../../../shared/constants";
+} from "../../hooks";
+import { MAP_TARGET_ID } from "../../lib";
+import { type PolygonModel } from "../../../../shared/types";
+import { PointCardInfo, PolygonCardInfo } from "../../../../shared/ui";
+import { Paths } from "../../../../shared/constants";
 
 interface MapProps {
   polygons: PolygonModel[];
