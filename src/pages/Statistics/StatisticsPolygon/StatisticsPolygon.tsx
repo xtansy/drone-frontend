@@ -1,10 +1,16 @@
+import styles from "./styles.module.scss";
+
 import { FC, useEffect, useState } from "react";
 
-import { Stack, Box, Typography } from "@mui/material";
+import { Stack, Box, Typography, Paper } from "@mui/material";
 
 import { getPolygonById } from "../../../shared/api";
 import { type PolygonModel } from "../../../shared/types";
-import { MiniMap } from "../../../components";
+import {
+  MiniMap,
+  MetricPolygonCards,
+  PolygonPoints,
+} from "../../../components";
 
 interface StatisticsPolygonProps {
   polygonId: string;
@@ -21,12 +27,10 @@ export const StatisticsPolygon: FC<StatisticsPolygonProps> = ({
     });
   }, [polygonId]);
 
-  console.log("@@ polygon", polygon);
-
   if (!polygon) return null;
 
   return (
-    <Stack sx={{ marginTop: "5px" }} spacing={4}>
+    <Stack sx={{ marginTop: "5px" }} spacing={"15px"}>
       <Box>
         <Typography
           variant="h2"
@@ -39,9 +43,25 @@ export const StatisticsPolygon: FC<StatisticsPolygonProps> = ({
         </Typography>
       </Box>
 
-      <Box>
+      {/* Мини-карта */}
+      <Paper
+        className={styles.miniMapWrapper}
+        sx={{
+          margin: "15px 0 0 0 !important",
+          p: 2,
+          pt: 1,
+          backgroundColor: "rgba(255, 255, 255, 0.02)",
+        }}
+      >
+        <Typography variant="h6" sx={{ color: "var(--primary-color)", mb: 1 }}>
+          Местоположение на карте
+        </Typography>
         <MiniMap polygon={polygon} />
-      </Box>
+      </Paper>
+
+      <MetricPolygonCards polygon={polygon} />
+
+      <PolygonPoints points={polygon.points} />
     </Stack>
   );
 };

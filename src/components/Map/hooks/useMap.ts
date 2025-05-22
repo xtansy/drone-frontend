@@ -1,8 +1,12 @@
 import { useEffect, useState } from "react";
-import { Map, View } from "ol";
+import { Collection, Map, View } from "ol";
 import VectorLayer from "ol/layer/Vector";
 import VectorSource from "ol/source/Vector";
-import { defaults as defaultInteractions, DragRotate } from "ol/interaction.js";
+import {
+  defaults as defaultInteractions,
+  DragRotate,
+  Interaction,
+} from "ol/interaction.js";
 import { apply } from "ol-mapbox-style";
 
 import {
@@ -11,20 +15,30 @@ import {
   VECTOR_LAYER_STYLE,
   MAP_TILES_API_URL,
 } from "../lib";
+import Control from "ol/control/Control";
 
-export const useMap = () => {
+interface UseMapProps {
+  targetId?: string;
+  view?: View;
+  interactions?: Collection<Interaction> | Interaction[];
+  controls?: Collection<Control> | Control[];
+}
+
+export const useMap = ({
+  targetId = MAP_TARGET_ID,
+  view = new View({ zoom: 17, center: VGU_COORDINATES }),
+  interactions = defaultInteractions().extend([new DragRotate()]),
+  controls = [],
+}: UseMapProps = {}) => {
   const [map, setMap] = useState<Map | null>(null);
   const [vectorLayer, setVectorLayer] = useState<VectorLayer | null>(null);
 
   useEffect(() => {
     const initialMap = new Map({
-      target: MAP_TARGET_ID,
-      view: new View({
-        zoom: 17,
-        center: VGU_COORDINATES,
-      }),
-      controls: [],
-      interactions: defaultInteractions().extend([new DragRotate()]),
+      target: targetId,
+      view,
+      interactions,
+      controls,
     });
 
     apply(initialMap, MAP_TILES_API_URL);

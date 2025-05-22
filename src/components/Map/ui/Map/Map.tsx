@@ -10,7 +10,7 @@ import {
   useDrawPointsFromPolygons,
   useClick,
 } from "../../hooks";
-import { MAP_TARGET_ID } from "../../lib";
+import { getPolygonsCenterAndZoom, MAP_TARGET_ID } from "../../lib";
 import { type PolygonModel } from "../../../../shared/types";
 import { PointCardInfo, PolygonCardInfo } from "../../../../shared/ui";
 import { Paths } from "../../../../shared/constants";
@@ -28,17 +28,35 @@ export const Map: FC<MapProps> = ({ polygons }) => {
 
   const [searchParams] = useSearchParams();
 
-  const lat = parseFloat(searchParams.get("lat") ?? "");
   const lon = parseFloat(searchParams.get("lon") ?? "");
+  const lat = parseFloat(searchParams.get("lat") ?? "");
 
   useDrawPolygons(vectorLayer?.getSource() ?? null, polygons);
   useDrawPointsFromPolygons(vectorLayer?.getSource() ?? null, polygons);
 
   useEffect(() => {
-    if (map && !isNaN(lat) && !isNaN(lon)) {
-      map.getView().setCenter([lat, lon]);
+    if (!map) return;
+
+    const view = map.getView();
+
+    if (!isNaN(lat) && !isNaN(lon)) {
+      view.setCenter([lon, lat]);
+    } else if (polygons.length > 0) {
+      const mapSize = map.getSize();
+      if (!mapSize) return;
+
+      const [width, height] = mapSize;
+
+      const { center, zoom } = getPolygonsCenterAndZoom(
+        polygons,
+        width,
+        height
+      );
+
+      view.setCenter(center);
+      view.setZoom(zoom);
     }
-  }, [lat, lon, map]);
+  }, [lat, lon, map, polygons]);
 
   const onClickPointMoreStat = () => {
     if (!selectedFeatureData) return;
@@ -65,7 +83,11 @@ export const Map: FC<MapProps> = ({ polygons }) => {
           <>
             {popupData.type === "polygon" && (
               <div>
-                <strong>Полигон: {popupData.data.name}</strong>
+                <strong>Полигон измерений</strong>
+                <div>
+                  Организация:{" "}
+                  <strong>{popupData.data.organizationPoint.name}</strong>
+                </div>
                 <div>Точек: {popupData.data.points.length}</div>
               </div>
             )}

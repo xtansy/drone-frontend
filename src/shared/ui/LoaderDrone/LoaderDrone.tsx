@@ -1,6 +1,14 @@
 import styles from "./styles.module.scss";
 
-export const LoaderDrone = () => {
+import { FC } from "react";
+
+interface LoaderDroneProps {
+  text?: string;
+}
+
+export const LoaderDrone: FC<LoaderDroneProps> = ({
+  text = "Загрузка данных с дрона...",
+}) => {
   return (
     <div className={styles.loaderWrapper}>
       <svg
@@ -36,7 +44,7 @@ export const LoaderDrone = () => {
           />
         </g>
       </svg>
-      <p className={styles.text}>Загрузка данных с дрона...</p>
+      <p className={styles.text}>{text}</p>
     </div>
   );
 };

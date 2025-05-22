@@ -2,18 +2,26 @@ import { FC, useMemo } from "react";
 import { Typography, Stack, Paper } from "@mui/material";
 
 import { MetricCard } from "../../shared/ui";
-import { type PointModel } from "../../shared/types";
+import { type PolygonModel } from "../../shared/types";
 
-interface MetricPointCardsProps {
-  point: PointModel;
+interface MetricPolygonCardsProps {
+  polygon: PolygonModel;
 }
 
-export const MetricPointCards: FC<MetricPointCardsProps> = ({ point }) => {
+export const MetricPolygonCards: FC<MetricPolygonCardsProps> = ({
+  polygon,
+}) => {
   const averageValues = useMemo(() => {
-    const count = point.measurements.length;
-    if (count === 0) return null;
+    if (polygon.points.length === 0) return null;
 
-    const sums = point.measurements.reduce(
+    const allMeasurements = polygon.points.flatMap(
+      (point) => point.measurements
+    );
+    const measurementCount = allMeasurements.length;
+
+    if (measurementCount === 0) return null;
+
+    const sums = allMeasurements.reduce(
       (acc, m) => ({
         temperature: acc.temperature + m.temperature,
         co2: acc.co2 + m.co2_level,
@@ -24,19 +32,19 @@ export const MetricPointCards: FC<MetricPointCardsProps> = ({ point }) => {
     );
 
     return {
-      temperature: Math.round(sums.temperature / count),
-      co2: Math.round(sums.co2 / count),
-      humidity: Math.round(sums.humidity / count),
-      pressure: Math.round(sums.pressure / count),
+      temperature: Math.round(sums.temperature / measurementCount),
+      co2: Math.round(sums.co2 / measurementCount),
+      humidity: Math.round(sums.humidity / measurementCount),
+      pressure: Math.round(sums.pressure / measurementCount),
     };
-  }, [point]);
+  }, [polygon]);
 
   if (!averageValues) return null;
 
   return (
     <Paper sx={{ p: 2, backgroundColor: "rgba(255, 255, 255, 0.02)" }}>
       <Typography variant="h6" sx={{ color: "var(--primary-color)", mb: 2 }}>
-        Средние показатели
+        Средние показатели по всем точкам
       </Typography>
       <Stack direction="row" flexWrap="wrap" gap={2}>
         <MetricCard

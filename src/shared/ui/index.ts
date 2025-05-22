@@ -13,3 +13,7 @@ export * from "./PointCardInfo/PointCardInfo";
 export * from "./PolygonCardInfo/PolygonCardInfo";
 export * from "./Breadcrumbs/Breadcrumbs";
 export * from "./MetricCard/MetricCard";
+export * from "./PointStatisticCard/PointStatisticCard";
+export * from "./PolygonStatisticCard/PolygonStatisticCard";
+export * from "./MetricBadge/MetricBadge";
+export * from "./PointFromPolygonStatisticCard/PointFromPolygonStatisticCard";

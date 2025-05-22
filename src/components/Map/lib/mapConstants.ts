@@ -2,6 +2,8 @@ import { Circle, Fill, Stroke, Style } from "ol/style";
 
 export const MAP_TARGET_ID = "map";
 
+export const MINI_MAP_TARGET_ID = "miniMap";
+
 export const MAP_TILES_API_URL =
   "https://api.maptiler.com/maps/019690d8-2965-7306-b308-5ed6041f45be/style.json?key=aIIH2TLTQGTuteAf6oBb";
 

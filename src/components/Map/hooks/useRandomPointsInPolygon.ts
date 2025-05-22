@@ -11,7 +11,6 @@ export const useRandomPointsInPolygon = (
   useEffect(() => {
     if (!vectorSource || !polygonCoords.length) return;
 
-    // Функция для проверки, находится ли точка внутри полигона
     const pointInPolygon = (point: number[], vs: number[][]) => {
       const x = point[0],
         y = point[1];
@@ -29,7 +28,6 @@ export const useRandomPointsInPolygon = (
       return inside;
     };
 
-    // Находим границы полигона
     const extent = polygonCoords.reduce(
       (acc, coord) => {
         return [
@@ -42,7 +40,6 @@ export const useRandomPointsInPolygon = (
       [Infinity, Infinity, -Infinity, -Infinity]
     );
 
-    // Генерируем случайные точки внутри полигона
     const points = [];
     while (points.length < count) {
       const x = extent[0] + Math.random() * (extent[2] - extent[0]);
@@ -53,7 +50,6 @@ export const useRandomPointsInPolygon = (
       }
     }
 
-    // Добавляем точки на карту
     points.forEach((coord) => {
       const point = new Point(coord);
       const feature = new Feature(point);

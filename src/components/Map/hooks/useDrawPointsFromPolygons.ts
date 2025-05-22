@@ -16,7 +16,7 @@ export const useDrawPointsFromPolygons = (
 
     polygons.forEach((polygon) => {
       polygon.points.forEach((point) => {
-        const geometry = new Point([point.latitude, point.longitude]);
+        const geometry = new Point([point.longitude, point.latitude]);
 
         const feature = new Feature({
           geometry,
@@ -32,7 +32,7 @@ export const useDrawPointsFromPolygons = (
       });
 
       const orgPoint = polygon.organizationPoint;
-      const orgGeometry = new Point([orgPoint.latitude, orgPoint.longitude]);
+      const orgGeometry = new Point([orgPoint.longitude, orgPoint.latitude]);
 
       const orgFeature = new Feature({
         geometry: orgGeometry,

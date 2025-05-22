@@ -48,8 +48,8 @@ export const Information = () => {
     });
   }, []);
 
-  const handleRowClick = (lat: number, lon: number) => {
-    navigate(`/map?lat=${lat}&lon=${lon}`);
+  const handleRowClick = (lon: number, lat: number) => {
+    navigate(`/map?lon=${lon}&lat=${lat}`);
   };
 
   return (
@@ -58,13 +58,13 @@ export const Information = () => {
         Мониторинговая таблица
       </Typography>
 
-      <Box sx={{ maxHeight: "500px", width: "100%", overflow: "auto" }}>
+      <Box sx={{ height: "100%", width: "100%", overflow: "auto" }}>
         <DataGridCustom
           rows={points}
           columns={columns}
           onRowClick={(params) => {
-            const { latitude, longitude } = params.row;
-            handleRowClick(latitude, longitude);
+            const { longitude, latitude } = params.row;
+            handleRowClick(longitude, latitude);
           }}
         />
       </Box>

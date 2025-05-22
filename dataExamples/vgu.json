@@ -16,8 +16,8 @@
       ],
       "points": [
         {
-          "latitude": 4364248.609259135,
-          "longitude": 6738217.368408009,
+          "longitude": 4364248.609259135,
+          "latitude": 6738217.368408009,
           "measurements": [
             {
               "temperature": 23.1,
@@ -106,8 +106,8 @@
           ]
         },
         {
-          "latitude": 4364285.339857416,
-          "longitude": 6738155.108308361,
+          "longitude": 4364285.339857416,
+          "latitude": 6738155.108308361,
           "measurements": [
             {
               "temperature": 22.7,
@@ -124,8 +124,8 @@
           ]
         },
         {
-          "latitude": 4364534.86611623,
-          "longitude": 6738281.984685328,
+          "longitude": 4364534.86611623,
+          "latitude": 6738281.984685328,
           "measurements": [
             {
               "temperature": 24.3,
@@ -144,8 +144,8 @@
       ],
       "organizationPoint": {
         "name": "ВГУ",
-        "latitude": 4364393,
-        "longitude": 6738285
+        "longitude": 4364393,
+        "latitude": 6738285
       }
     }
   ]
