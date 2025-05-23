@@ -11,6 +11,7 @@ import {
   MetricPolygonCards,
   PolygonPoints,
 } from "../../../components";
+import { LoaderDrone } from "../../../shared/ui";
 
 interface StatisticsPolygonProps {
   polygonId: string;
@@ -20,14 +21,18 @@ export const StatisticsPolygon: FC<StatisticsPolygonProps> = ({
   polygonId,
 }) => {
   const [polygon, setPolygon] = useState<PolygonModel | null>(null);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   useEffect(() => {
-    getPolygonById(polygonId).then(({ data }) => {
-      setPolygon(data);
-    });
+    getPolygonById(polygonId)
+      .then(({ data }) => {
+        setPolygon(data);
+      })
+      .finally(() => setIsLoading(false));
   }, [polygonId]);
 
-  if (!polygon) return null;
+  if (!polygon || isLoading)
+    return <LoaderDrone text="Загрузка данных для точки..." />;
 
   return (
     <Stack sx={{ marginTop: "5px" }} spacing={"15px"}>

@@ -4,6 +4,7 @@ import { Box, Paper, Typography } from "@mui/material";
 
 import { ButtonCustom } from "../ButtonCustom/ButtonCustom";
 import { Paths } from "../../constants";
+import { formatCoordinates } from "../../../components/Map/lib";
 
 interface PointStatisticCardProps {
   pointId: string;
@@ -62,7 +63,7 @@ export const PointStatisticCard: FC<PointStatisticCardProps> = ({
       </Typography>
 
       <Typography sx={{ fontSize: "14px" }}>
-        📍 Координаты: {latitude.toFixed(4)}, {longitude.toFixed(4)}
+        📍 Координаты: {formatCoordinates([longitude, latitude], 4)}
       </Typography>
 
       <Box mt={1}>

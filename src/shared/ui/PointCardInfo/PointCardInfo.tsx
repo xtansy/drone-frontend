@@ -56,7 +56,7 @@ export const PointCardInfo: FC<PointCardInfoProps> = ({
       </p>
       <p>
         <span>Координаты:</span>{" "}
-        {formatCoordinates([point.latitude, point.longitude])}
+        {formatCoordinates([point.longitude, point.latitude])}
       </p>
 
       <Box

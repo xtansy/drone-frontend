@@ -1,24 +1,27 @@
 import styles from "./styles.module.scss";
 
 import { useEffect, useState } from "react";
-
+import { useNavigate } from "react-router";
 import { Typography, Box } from "@mui/material";
+import { toLonLat } from "ol/proj";
 
-import { PaperCustom, DataGridCustom } from "../../shared/ui";
+import { PaperCustom, DataGridCustom, LoaderDrone } from "../../shared/ui";
 import { getAllPoints } from "../../shared/api";
-import { columns, type PointRow } from "./constants";
 import { type PointModel } from "../../shared/types";
 import { generateRandomNumber } from "../../shared/lib";
-import { useNavigate } from "react-router";
+import { columns, type PointRow } from "./constants";
+
 const converter = (points: PointModel[]): PointRow[] => {
   const ans: PointRow[] = [];
 
   points.forEach((point) => {
+    const [longitude, latitude] = toLonLat([point.longitude, point.latitude]);
+
     let newPoint = {
       id: generateRandomNumber(),
       organization: point.organizationPoint.name,
-      latitude: point.latitude,
-      longitude: point.longitude,
+      longitude,
+      latitude,
     };
 
     point.measurements.forEach((measurement) => {
@@ -40,12 +43,15 @@ const converter = (points: PointModel[]): PointRow[] => {
 
 export const Information = () => {
   const [points, setPoints] = useState<PointRow[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
   const navigate = useNavigate();
   useEffect(() => {
-    getAllPoints().then((res) => {
-      const rows = converter(res.data);
-      setPoints(rows);
-    });
+    getAllPoints()
+      .then((res) => {
+        const rows = converter(res.data);
+        setPoints(rows);
+      })
+      .finally(() => setIsLoading(false));
   }, []);
 
   const handleRowClick = (lon: number, lat: number) => {
@@ -58,16 +64,20 @@ export const Information = () => {
         Мониторинговая таблица
       </Typography>
 
-      <Box sx={{ height: "100%", width: "100%", overflow: "auto" }}>
-        <DataGridCustom
-          rows={points}
-          columns={columns}
-          onRowClick={(params) => {
-            const { longitude, latitude } = params.row;
-            handleRowClick(longitude, latitude);
-          }}
-        />
-      </Box>
+      {!isLoading ? (
+        <Box sx={{ height: "100%", width: "100%", overflow: "auto" }}>
+          <DataGridCustom
+            rows={points}
+            columns={columns}
+            onRowClick={(params) => {
+              const { longitude, latitude } = params.row;
+              handleRowClick(longitude, latitude);
+            }}
+          />
+        </Box>
+      ) : (
+        <LoaderDrone text="Загрузка данных для таблицы..." />
+      )}
     </PaperCustom>
   );
 };

@@ -10,7 +10,6 @@ import {
   useMap,
 } from "../../hooks";
 import { View } from "ol";
-import { defaults as defaultInteractions, DragRotate } from "ol/interaction.js";
 import cn from "classnames";
 
 interface MiniMapProps {
@@ -33,11 +32,7 @@ export const MiniMap: FC<MiniMapProps> = ({
     targetId,
     view: new View({ zoom: 16.8, center }),
     controls: [new Zoom({ className: styles.customZoomControl })],
-    interactions: defaultInteractions({
-      dragPan: false,
-      altShiftDragRotate: false,
-      pinchRotate: false,
-    }).extend([new DragRotate()]),
+    interactions: [],
   });
 
   useDrawPolygons(vectorLayer?.getSource() ?? null, [polygon]);

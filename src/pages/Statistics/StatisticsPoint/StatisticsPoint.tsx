@@ -3,8 +3,10 @@ import { Typography, Box, Stack, Paper, Tabs, Tab } from "@mui/material";
 import { LineChart } from "@mui/x-charts";
 import dayjs from "dayjs";
 
+import { formatCoordinates } from "../../../components/Map/lib";
 import { MetricPointCards } from "../../../components";
 import { getPointById } from "../../../shared/api";
+import { LoaderDrone } from "../../../shared/ui";
 import { type PointModel } from "../../../shared/types";
 
 interface StatisticsPointProps {
@@ -42,15 +44,20 @@ const METRIC_CONFIG = {
 
 export const StatisticsPoint: FC<StatisticsPointProps> = ({ pointId }) => {
   const [point, setPoint] = useState<PointModel | null>(null);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+
   const [activeTab, setActiveTab] = useState<MetricTab>("temperature");
 
   useEffect(() => {
-    getPointById(pointId).then(({ data }) => {
-      setPoint(data);
-    });
+    getPointById(pointId)
+      .then(({ data }) => {
+        setPoint(data);
+      })
+      .finally(() => setIsLoading(false));
   }, [pointId]);
 
-  if (!point) return null;
+  if (!point || isLoading)
+    return <LoaderDrone text="Загрузка данных для точки..." />;
 
   const labels = point.measurements.map((m) =>
     dayjs(m.createdAt).format("DD.MM.YYYY, HH:mm")
@@ -89,13 +96,11 @@ export const StatisticsPoint: FC<StatisticsPointProps> = ({ pointId }) => {
         >
           Координаты:{" "}
           <span style={{ color: "var(--white-color)" }}>
-            {point.latitude}, {point.longitude}
+            {formatCoordinates([point.longitude, point.latitude], 4)}
           </span>
         </Typography>
       </Box>
-
       <MetricPointCards point={point} />
-
       {/* Графики с табами */}
       <Paper sx={{ p: 0, backgroundColor: "rgba(255, 255, 255, 0.02)" }}>
         <Tabs

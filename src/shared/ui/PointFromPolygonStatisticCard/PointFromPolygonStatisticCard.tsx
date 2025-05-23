@@ -6,6 +6,7 @@ import { ArrowForward } from "@mui/icons-material";
 import { Paths } from "../../constants";
 import { MetricBadge } from "..";
 import { type PointModel } from "../../types";
+import { formatCoordinates } from "../../../components/Map/lib";
 
 const calculateAveragesForPoint = (point: PointModel) => {
   const measurements = point.measurements;
@@ -62,8 +63,8 @@ export const PointFromPolygonStatisticCard: FC<
             Точка #{point._id}
           </Typography>
           <Typography variant="caption" sx={{ color: "var(--white-color)" }}>
-            Координаты: {point.latitude.toFixed(0)},{" "}
-            {point.longitude.toFixed(0)}
+            Координаты:{" "}
+            {formatCoordinates([point.longitude, point.latitude], 4)}
           </Typography>
         </Box>
         <IconButton

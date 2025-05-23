@@ -28,8 +28,8 @@ export const PolygonStatisticCard: FC<PolygonStatisticCardProps> = ({
   return (
     <Paper
       sx={{
-        minWidth: 320,
-        minHeight: 200,
+        minWidth: "320px",
+        minHeight: "200px",
         p: 2.5,
         backgroundColor: "var(--card-bg-color)",
         border: "1px solid var(--border-color)",
@@ -43,7 +43,7 @@ export const PolygonStatisticCard: FC<PolygonStatisticCardProps> = ({
         },
       }}
     >
-      <Stack spacing={1.5}>
+      <Stack sx={{ height: "100%" }} spacing={1.5}>
         <Box
           sx={{
             display: "flex",
@@ -72,7 +72,7 @@ export const PolygonStatisticCard: FC<PolygonStatisticCardProps> = ({
           />
         </Box>
 
-        <Stack direction="row" spacing={2}>
+        <Stack flexGrow={1} spacing={2}>
           <MiniMap
             targetId={polygon._id}
             polygon={polygon}
@@ -92,7 +92,6 @@ export const PolygonStatisticCard: FC<PolygonStatisticCardProps> = ({
           size="small"
           onClick={() => handleNavigateToPolygon(polygon._id)}
           sx={{
-            mt: 2,
             color: "var(--accent-color)",
             borderColor: "var(--primary-color)",
             "&:hover": {
