@@ -59,9 +59,9 @@ export const StatisticsPoint: FC<StatisticsPointProps> = ({ pointId }) => {
   if (!point || isLoading)
     return <LoaderDrone text="Загрузка данных для точки..." />;
 
-  const labels = point.measurements.map((m) =>
-    dayjs(m.createdAt).format("DD.MM.YYYY, HH:mm")
-  );
+  const labels = point.measurements
+    .sort((a, b) => dayjs(a.createdAt).diff(dayjs(b.createdAt)))
+    .map((m) => dayjs(m.createdAt).format("DD.MM.YYYY, HH:mm"));
 
   const metricsData = {
     temperature: point.measurements.map((m) => m.temperature),

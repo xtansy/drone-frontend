@@ -7,6 +7,7 @@ import { LineChart } from "@mui/x-charts/LineChart";
 import type { MeasurementPointModel, PointModel } from "../../types";
 import { formatCoordinates } from "../../../components/Map/lib";
 import { ButtonCustom } from "..";
+import dayjs from "dayjs";
 
 interface PointCardInfoProps {
   point: PointModel;
@@ -33,7 +34,13 @@ export const PointCardInfo: FC<PointCardInfoProps> = ({
   onClose,
   onClickMoreStat,
 }) => {
-  const measurements = point.measurements.slice(-6);
+  const measurements = point.measurements
+    .slice(-6)
+    .sort((a, b) => dayjs(a.createdAt).diff(dayjs(b.createdAt)));
+
+  const labels = measurements.map((m) =>
+    dayjs(m.createdAt).format("DD.MM.YYYY, HH:mm")
+  );
 
   const [selectedMetric, setSelectedMetric] = useState("temperature");
 
@@ -102,13 +109,13 @@ export const PointCardInfo: FC<PointCardInfoProps> = ({
           xAxis={[
             {
               scaleType: "point",
-              data: measurements.map((m) => m.createdAt),
-              valueFormatter: (value) =>
-                new Date(value).toLocaleDateString("ru-RU", {
-                  day: "2-digit",
-                  month: "2-digit",
-                  year: "2-digit",
-                }),
+              data: labels,
+              valueFormatter: (value, context) => {
+                if (context.location === "tick") {
+                  return dayjs(value).format("MM.DD");
+                }
+                return value;
+              },
             },
           ]}
           series={[

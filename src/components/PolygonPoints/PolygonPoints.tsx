@@ -45,10 +45,11 @@ export const PolygonPoints: FC<PolygonPointsProps> = ({ points }) => {
         }}
         spacing={2}
       >
-        {points.map((point) => {
+        {points.map((point, index) => {
           const measurements = point.measurements;
           return (
             <PointStatisticCard
+              key={index}
               pointId={point._id}
               latitude={point.latitude}
               longitude={point.longitude}
