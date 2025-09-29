@@ -22,17 +22,24 @@
 
 ![Главная страница](assets/myDroneMain.gif)
 
-img
-<img src="assets/myDroneMain.gif" alt="myDroneMain"/>
-
 <details>
   <summary><strong>Карта</strong></summary>
   <img src="assets/MyDroneMap.png" alt="map"/>
 </details>
 
 <details>
-  <summary><strong>Статистика</strong></summary>
-  <img src="assets/MyDroneStats.png" alt="stats"/>
+  <summary><strong>Общая статистика по полигонам</strong></summary>
+  <img src="assets/MyDroneStatsAll.png" alt="statsAll"/>
+</details>
+
+<details>
+  <summary><strong>Статистика по полигону</strong></summary>
+  <img src="assets/MyDroneStats.png" alt="statsPolygon"/>
+</details>
+
+<details>
+  <summary><strong>Статистика по точке</strong></summary>
+  <img src="assets/MyDroneStatsPoint.png" alt="statsPoint"/>
 </details>
 
 <details>
