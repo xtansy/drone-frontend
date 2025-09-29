@@ -20,21 +20,30 @@
 
 ### Главная страница
 
-[![Главная страница](assets/MyDroneTable.png)](assets/myDroneMain.gif)
-
 ![Главная страница](assets/myDroneMain.gif)
 
-### Таблица
+### Карта / Статистика / Таблица
 
-![Таблица](assets/MyDroneTable.png)
+<div style="display: flex; overflow: auto"> 
+  <img src="assets/MyDroneMap.png" alt="map"/>
+  <img src="assets/MyDroneStats.png" alt="stats"/>
+  <img src="assets/MyDroneTable.png" alt="table"/>
+</div>
 
-### Карта
+<details>
+  <summary>Карта</summary>
+  <img src="assets/MyDroneMap.png" alt="map"/>
+</details>
 
-![Карта](assets/MyDroneMap.png)
+<details>
+  <summary>Статистика</summary>
+  <img src="assets/MyDroneStats.png" alt="stats"/>
+</details>
 
-### Статистика
-
-![Карта](assets/MyDroneStats.png)
+<details>
+  <summary>Таблица</summary>
+  <img src="assets/MyDroneTable.png" alt="table"/>
+</details>
 
 ## 🛠️ Технологии
 
