@@ -22,26 +22,21 @@
 
 ![Главная страница](assets/myDroneMain.gif)
 
-### Карта / Статистика / Таблица
-
-<div style="display: flex; overflow: auto"> 
-  <img src="assets/MyDroneMap.png" alt="map"/>
-  <img src="assets/MyDroneStats.png" alt="stats"/>
-  <img src="assets/MyDroneTable.png" alt="table"/>
-</div>
+img
+<img src="assets/myDroneMain.gif" alt="myDroneMain"/>
 
 <details>
-  <summary>Карта</summary>
+  <summary><strong>Карта</strong></summary>
   <img src="assets/MyDroneMap.png" alt="map"/>
 </details>
 
 <details>
-  <summary>Статистика</summary>
+  <summary><strong>Статистика</strong></summary>
   <img src="assets/MyDroneStats.png" alt="stats"/>
 </details>
 
 <details>
-  <summary>Таблица</summary>
+  <summary><strong>Таблица</strong></summary>
   <img src="assets/MyDroneTable.png" alt="table"/>
 </details>
 
@@ -64,14 +59,17 @@
 
 ## 🗂️ Диаграммы
 
-### Диаграмма классов
+<details>
+  <summary><strong>Диаграмма классов</strong></summary>
+  <img src="assets/classDiagram.png" alt="classDiagram"/>
+</details>
 
-![Диаграмма классов](assets/classDiagram.png)
+<details>
+  <summary><strong>Диаграмма вариантов использования</strong></summary>
+  <img src="assets/useDiagram.png" alt="useDiagram"/>
+</details>
 
-### Диаграмма вариантов использования
-
-![Use Case](assets/useDiagram.png)
-
-### Диаграмма последовательностей
-
-![Последовательности](assets/seqDiagram.png)
+<details>
+  <summary><strong>Диаграмма последовательностей</strong></summary>
+  <img src="assets/seqDiagram.png" alt="seqDiagram"/>
+</details>
