@@ -2,6 +2,8 @@
 
 Проект для **мониторинга** и **анализа** экологической информации с помощью **дронов**.
 
+🌐 Развернутое приложение: [**Смотреть демо**](https://xtansy.github.io/drone-frontend/)
+
 [![Frontend](https://img.shields.io/badge/Repo-Frontend-blue?logo=react)](https://github.com/xtansy/drone-frontend)
 [![Backend](https://img.shields.io/badge/Repo-Backend-green?logo=node.js)](https://github.com/xtansy/drone-backend)
 
@@ -17,6 +19,8 @@
 ## 📸 Интерфейс
 
 ### Главная страница
+
+[![Главная страница](assets/MyDroneTable.png)](assets/myDroneMain.gif)
 
 ![Главная страница](assets/myDroneMain.gif)
 
