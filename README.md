@@ -9,10 +9,14 @@
 
 ## 📸 Интерфейс
 
-|           Заголовок 1           |            Заголовок 2            |
-| :-----------------------------: | :-------------------------------: |
-| ![Main](assets/myDroneMain.gif) | ![Table](assets/MyDroneTable.png) |
-|       _Главная страница_        |        _Таблица с данными_        |
+<div style="display: flex; overflow-x: auto; gap: 10px;">
+<figure style="margin: 0 10px;">
+  <img src="assets/MyDroneTable.png" width="300"/>
+  <figcaption style="text-align:center;">Главная страница</figcaption>
+</figure>
+  <img src="assets/myDroneMain.gif" width="300" />
+  <img src="assets/MyDroneTable.png" width="300" />
+</div>
 
 ## 📖 Цели проекта
 
