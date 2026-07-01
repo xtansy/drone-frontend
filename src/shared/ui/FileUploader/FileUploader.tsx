@@ -1,7 +1,7 @@
 import styles from "./styles.module.scss";
 
 import { FC, useCallback, useState } from "react";
-import { useDropzone } from "react-dropzone";
+import { useDropzone, FileRejection } from "react-dropzone";
 import {
   CloudUpload,
   InsertDriveFile,
@@ -22,7 +22,7 @@ export const FileUploader: FC<FileUploaderProps> = ({ onSend }) => {
   const [isError, setIsError] = useState<boolean>(false);
 
   const onDrop = useCallback(
-    (acceptedFiles: File[], fileRejections: File[]) => {
+    (acceptedFiles: File[], fileRejections: FileRejection[]) => {
       if (fileRejections.length > 0) {
         setIsError(true);
         return;
@@ -36,7 +36,10 @@ export const FileUploader: FC<FileUploaderProps> = ({ onSend }) => {
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     onDrop,
-    accept: [".txt", ".csv"],
+    accept: {
+      "text/plain": [".txt"],
+      "text/csv": [".csv"],
+    },
     maxSize: 10 * 1024 * 1024, // 10MB
   });
 

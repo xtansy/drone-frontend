@@ -1,10 +1,11 @@
-import { FC } from "react";
+import { FC, ReactNode } from "react";
 import { Box, Typography } from "@mui/material";
 
 interface MetricBadgeProps {
   value: string;
   unit: string;
-  label: string;
+  // ReactNode — чтобы в подпись можно было передать иконку, а не только текст
+  label: ReactNode;
 }
 
 export const MetricBadge: FC<MetricBadgeProps> = ({ value, unit, label }) => (
@@ -18,7 +19,7 @@ export const MetricBadge: FC<MetricBadgeProps> = ({ value, unit, label }) => (
       bgcolor: "var(--border-color)",
     }}
   >
-    <Typography variant="body2">{label}</Typography>
+    <Box sx={{ display: "flex", alignItems: "center" }}>{label}</Box>
 
     <Typography
       variant="body2"

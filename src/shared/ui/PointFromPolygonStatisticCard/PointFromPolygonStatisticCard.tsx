@@ -1,7 +1,13 @@
 import { FC } from "react";
 import { useNavigate } from "react-router";
 import { Box, IconButton, Paper, Stack, Typography } from "@mui/material";
-import { ArrowForward } from "@mui/icons-material";
+import {
+  ArrowForward,
+  ThermostatOutlined,
+  WaterDropOutlined,
+  Co2,
+  SpeedOutlined,
+} from "@mui/icons-material";
 
 import { Paths } from "../../constants";
 import { MetricBadge } from "..";
@@ -79,22 +85,22 @@ export const PointFromPolygonStatisticCard: FC<
       {pointAverages ? (
         <Box sx={{ display: "flex", gap: 1, mt: 1 }}>
           <MetricBadge
-            label="🌡"
+            label={<ThermostatOutlined sx={{ fontSize: 15, color: "#00ffff" }} />}
             value={String(pointAverages.temperature)}
             unit="°C"
           />
           <MetricBadge
-            label="💧"
+            label={<WaterDropOutlined sx={{ fontSize: 15, color: "#66ff66" }} />}
             value={String(pointAverages.humidity)}
             unit="%"
           />
           <MetricBadge
-            label="🫁"
+            label={<Co2 sx={{ fontSize: 15, color: "#ff3366" }} />}
             value={String(pointAverages.co2)}
             unit="ppm"
           />
           <MetricBadge
-            label="📟"
+            label={<SpeedOutlined sx={{ fontSize: 15, color: "#ffa500" }} />}
             value={String(pointAverages.pressure)}
             unit="мм"
           />

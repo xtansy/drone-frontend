@@ -1,10 +1,34 @@
-import { FC } from "react";
+import { FC, ReactNode } from "react";
 import { useNavigate } from "react-router";
-import { Box, Paper, Typography } from "@mui/material";
+import { Box, Paper, Stack, Typography } from "@mui/material";
+import {
+  PlaceOutlined,
+  ThermostatOutlined,
+  WaterDropOutlined,
+  Co2,
+  SpeedOutlined,
+} from "@mui/icons-material";
 
 import { ButtonCustom } from "../ButtonCustom/ButtonCustom";
 import { Paths } from "../../constants";
 import { formatCoordinates } from "../../../components/Map/lib";
+
+// Строка метрики: иконка (в цвете метрики) + подпись + значение
+const MetricRow: FC<{ icon: ReactNode; label: string; value: string }> = ({
+  icon,
+  label,
+  value,
+}) => (
+  <Stack direction="row" alignItems="center" spacing={1}>
+    {icon}
+    <Typography sx={{ fontSize: "13px" }}>
+      {label}: {value}
+    </Typography>
+  </Stack>
+);
+
+// Цвета метрик синхронизированы с графиком в PointCardInfo
+const iconSx = (color: string) => ({ fontSize: 16, color });
 
 interface PointStatisticCardProps {
   pointId: string;
@@ -62,29 +86,42 @@ export const PointStatisticCard: FC<PointStatisticCardProps> = ({
         Точка: {pointId}
       </Typography>
 
-      <Typography sx={{ fontSize: "14px" }}>
-        📍 Координаты: {formatCoordinates([longitude, latitude], 4)}
-      </Typography>
+      <Stack direction="row" alignItems="center" spacing={1} sx={{ mb: 0.5 }}>
+        <PlaceOutlined sx={iconSx("var(--primary-color)")} />
+        <Typography sx={{ fontSize: "14px" }}>
+          Координаты: {formatCoordinates([longitude, latitude], 4)}
+        </Typography>
+      </Stack>
 
       <Box mt={1}>
         <Typography
           variant="body2"
-          sx={{ fontSize: "13px", color: "var(--primary-color)" }}
+          sx={{ fontSize: "13px", color: "var(--primary-color)", mb: 0.5 }}
         >
           Средние значения:
         </Typography>
-        <Typography sx={{ fontSize: "13px" }}>
-          🌡 Температура: {temperature} °C
-        </Typography>
-        <Typography sx={{ fontSize: "13px" }}>
-          💧 Влажность: {humidity} %
-        </Typography>
-        <Typography sx={{ fontSize: "13px" }}>
-          🫁 CO₂: {co2_level} ppm
-        </Typography>
-        <Typography sx={{ fontSize: "13px" }}>
-          📟 Давление: {pressure} мм
-        </Typography>
+        <Stack spacing={0.5}>
+          <MetricRow
+            icon={<ThermostatOutlined sx={iconSx("#00ffff")} />}
+            label="Температура"
+            value={`${temperature} °C`}
+          />
+          <MetricRow
+            icon={<WaterDropOutlined sx={iconSx("#66ff66")} />}
+            label="Влажность"
+            value={`${humidity} %`}
+          />
+          <MetricRow
+            icon={<Co2 sx={iconSx("#ff3366")} />}
+            label="CO₂"
+            value={`${co2_level} ppm`}
+          />
+          <MetricRow
+            icon={<SpeedOutlined sx={iconSx("#ffa500")} />}
+            label="Давление"
+            value={`${pressure} мм`}
+          />
+        </Stack>
       </Box>
 
       <ButtonCustom
